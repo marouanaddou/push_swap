@@ -26,6 +26,7 @@ int chek_min(int *stack_b, int size_b, int *index_min)
     }
     return (min);
 }
+
 int chek_max(int *stack_b, int size_b, int *index_max)
 {
     int j;
@@ -55,7 +56,6 @@ int opera_a(int *stack_a, int argc, int index, char chek)
 
     if(chek == 'i')
         contab = index;
-    //printf ("argc ==> %d index est ==>%d\n", argc, index);
     if (chek == 'o')
     {
         if (index >= argc / 2)
@@ -63,23 +63,25 @@ int opera_a(int *stack_a, int argc, int index, char chek)
         else if (index < argc / 2)
             contab = index + 1;
     }
+    //printf ("contba ===>%d\n", index);
     return (contab);
 }
 
 int opera_b_prim(int size_b, int value, int *stack_b, char chek)
 {
-    int i;
-    int size;
-    int contb;
-    int current_diff;
-    int smallest_diff;
+    long i;
+    long size;
+    long contb;
+    long current_diff;
+    long smallest_diff;
 
     i = 0;
     smallest_diff = INT_MAX;
-    //printf ("argc est %d\n",size_b);
+    size = 0;
     while (i <= size_b)
     {
-        current_diff = value - stack_b[i];
+        current_diff = (long)value - (long)stack_b[i];
+        // printf ("i est ==>%ld value %d - stack_b[%ld]%d == current_diff ==> %ld\n",i,value,i,stack_b[i], current_diff);
         if (current_diff < smallest_diff)
         {
             if (current_diff > 0 && current_diff < smallest_diff)
@@ -90,10 +92,37 @@ int opera_b_prim(int size_b, int value, int *stack_b, char chek)
         }
         i++;
     }
-    
+    // printf ("size ==>%ld\n", size);
     contb = opera_a(stack_b, size_b, size, chek);
   return (contb);
 }
+
+int find_right_pos(int size_b, int value, int *stack_b,char chek)
+{
+  int i;
+  int size;
+  int contb;
+  int j;
+  
+  i = 0;
+  j = size_b;
+
+  while (value < stack_b[size_b])
+    size_b--;
+  size = size_b;
+  size_b--;
+  while (size_b >= 0)
+  {
+    if (stack_b[size_b] > stack_b[size] && stack_b[size_b] < value)
+      size = size_b;
+    size_b--;
+  }
+   //printf ("j est %d\n", j);
+   //printf ("value = %d, size = %d, j = %d, chek %c \n ",value,size, j, chek);
+  contb = opera_a(stack_b, j, size, chek);
+  return (contb); 
+}
+
 int opera_b(int *stack_b, int value, int size_b, char chek)
 {
     int contb;
@@ -101,16 +130,17 @@ int opera_b(int *stack_b, int value, int size_b, char chek)
     int index_max;
     int size;
     int min = chek_min(stack_b, size_b, &index_min);
-    //printf ("min ===%d\n",min);
+    //printf ("min ====> %d\n", min);
     if (value <= min)
     {
-        //printf ("value < %d min ==> %d\n",value,min);
+        //printf ("value  %d <= min %d \n", value, min);
         if (index_min > size_b / 2)
             contb = size_b - index_min + 1;
         else if (index_min <= size_b / 2)
             contb = index_min;
         if (chek == 'i')
             contb = index_min;
+       // printf ("min ==>%d\n", min);
     }
     /*else if (stack_a[argc] > chek_max(stack_b, size_b, &index_max))
     {
@@ -121,7 +151,8 @@ int opera_b(int *stack_b, int value, int size_b, char chek)
         contb = index_max;
     }*/   
     else 
-        contb = opera_b_prim(size_b, value, stack_b, chek);
+        contb =find_right_pos(size_b, value, stack_b, chek);
+        //contb = opera_b_prim(size_b, value, stack_b, chek);
     return (contb);
 }
 
@@ -140,13 +171,13 @@ void rev_rotate(int argc, int *stack, char x)
             i++;
         }
         stack[i] = first;
-        //printf ("%d", stack[3]);
         if (x == 'a')
             write (1, "rra\n", 4);
         if (x == 'b')
             write (1, "rrb\n", 4);
     }
 }
+
 void rotate(int argc, int *stack, char x)
 {
     int last;
@@ -168,6 +199,7 @@ void rotate(int argc, int *stack, char x)
             write (1, "rb\n", 3);
     }
 }
+
 void swap(int argc, int *stack)
 {
     int swap;
@@ -179,12 +211,6 @@ void swap(int argc, int *stack)
         stack[argc - 2] = swap;
         //write(1, "sa\n", 3);
     }
-    // if (argc > 1)
-    // {
-    //     swap = stack[0];
-    //     stack[0] = stack[1];
-    //     stack[1] = swap;
-    // }
 }
 
 void push_a(int *argc, int *size_b, int *stack_a, int *stack_b) // b to a
@@ -196,13 +222,6 @@ void push_a(int *argc, int *size_b, int *stack_a, int *stack_b) // b to a
         *size_b -= 1;
         write(1, "pa\n", 3);
     }
-    // if (*argc < *size_b)
-    // {
-    //     stack_a[*size_b] = stack_b[*size_b - 1];
-    //     *argc += 1;
-    //     *size_b -= 1;
-    //     write(1, "pa\n", 3);
-    // }
 }
 
 void push_b(int *argc, int *size_b, int *stack_a, int *stack_b) // a to b
@@ -213,41 +232,57 @@ void push_b(int *argc, int *size_b, int *stack_a, int *stack_b) // a to b
         *argc -= 1;
         *size_b += 1;
         write(1, "pb\n", 3);
-    }
-    // if (*argc > 0)
-    // {
-    //     //stack_b[*size_b] = stack_a[*];
-    //     *argc -= 1;
-    //     *size_b += 1;
-    //     write(1, "pb\n", 3);
-    // }      
+    }//write(1, "pb\n", 3);     
 }
 
 int besta_index(int *stack_a, int *stack_b, int argc, int size_b)
 {
     int i;
     int j;
-    int best_istruction;
-    int current_instruction;
+     int best_istruction;
+     int current_instruction;
 
     i = 0;                      /* argc ==> kif size_b */
     best_istruction = INT_MAX; /* size_b - 1 ==> m3a kaykon zayad wahad ohna kana9sooh bach nbdaw b zero tji hiya hadik */
-    while(i < /*argc*/size_b)
+    while(i < argc/*size_b*/)
     {
-        current_instruction = opera_a(stack_b/*sta_a*/, /*argc*/size_b - 1, i,'o') 
-        /*+ opera_b(stack_b, stack_a[i], size_b,'o')*/+ opera_b(stack_a, stack_b[i], argc - 1, 'o');
-        //printf ("%d------------%d----------+%d\n",i,current_instruction,stack_b[i]);
+        current_instruction = opera_a(stack_a, argc - 1, i, 'o') + opera_b(stack_b, stack_a[i], size_b - 1, 'o');
+        printf ("%d------------+%d----------+%d\n",i,current_instruction,stack_a[i]);
         if (current_instruction < best_istruction)
         {
             best_istruction = current_instruction;
-            j = i;
+            j = i;  
         }
         i++;
     }
+    printf ("%d***----------------------***+%d\n",j,stack_a[j]);
     return (j);
 }
 
-void move_operation(int *stack, int total, int best, int operation,char x)
+void move_min(int *stack, int total, int best, int operation, char x)
+{
+    int i;
+
+    i = 0;
+    if (best > (total - 1) / 2)
+    {
+        while(i < operation)
+        {
+            rotate(total, stack,x);
+            i++;
+        }
+    }
+    else if (best <= (total - 1) / 2)
+    {
+        while(i < operation)
+        {
+            rev_rotate(total, stack,x);
+            i++;
+        }
+    }
+}
+
+void move_others(int *stack, int total, int best, int operation,char x)
 {
     int i;
 
@@ -269,11 +304,23 @@ void move_operation(int *stack, int total, int best, int operation,char x)
         }
     }
 }
-void handlar(int *stack_a, int *stack_b, int argc, int size_b)
+void chek_move(int *stack, int total, int best, int operation,char x)
 {
-    int i = 19 /*argc - 1*/;
+    int i;
+    int min;
+    int index_min;
+
+    i = 0;
+    min = chek_min(stack, total - 1, &index_min);
+    if (stack[best] <= min)
+        move_min(stack, total, best, operation, x);
+    else if (stack[best] > min)
+        move_others(stack, total, best, operation, x);    
+}
+void test_function(int *stack_a, int *stack_b, int argc, int size_b)
+{
+    int i = 9;
     printf ("******************************\n");
-    //printf ("%d\n", size_b);
     while (i >= 0)
     {
         printf ("%d| ----------+%d | --------+%d |\n", i, stack_a[i], stack_b[i]);
@@ -289,54 +336,43 @@ void ft_swap(int argc,int size_b, int *stack_a, int *stack_b)
     int conta;
     int contb;
 
-    
-    i = argc - 1;
-    while (2 <=  i)
-    {
-        push_b(&argc, &size_b, stack_a, stack_b);
-        stack_a[i] = 0;
-        //handlar(stack_a, stack_b, argc, size_b);
-        i--;
-    }
-    
+    i = argc - 1 - 2;
+    test_function(stack_a, stack_b, argc, size_b);
+    push_b(&argc, &size_b, stack_a, stack_b);
+    stack_a[9] = 0;
+    push_b(&argc, &size_b, stack_a, stack_b);
+    stack_a[8] = 0;
 
-    int j = 0; 
-    //push_a(&argc, &size_b, stack_a, stack_b);
-    //push_a(&argc, &size_b, stack_a, stack_b);
-    i = size_b -1 ;
-
+    test_function(stack_a, stack_b, argc, size_b);
     while (i >= 0)
     {
-        
-        best_b = besta_index(stack_a, stack_b, argc/* - 1*/, size_b /*- 1*/);
-        //best_a = opera_b(stack_b, stack_a[best_b], size_b - 1 , 'i');
-        best_a = opera_b(stack_a, stack_b[best_b], (argc - 1), 'i');
-        //   conta = opera_a(stack_a, argc - 1, best_b, 'o');
-        contb = opera_a(stack_b, (size_b - 1), best_b /*best_b*/, 'o');
-        //   contb = opera_b(stack_b, stack_a[best_a], size_b - 1, 'o');
-        conta = opera_b(stack_a, stack_b[best_b/*best_a*/], argc - 1 /*- 1*/, 'o');
-        move_operation(stack_a, argc, best_a, conta,'a');
-        move_operation(stack_b, size_b, best_b, contb,'b');
-        // printf ("%d |****************|%d\n",best_b,best_a);
-        // printf ("%d |****************|%d\n",contb,conta);
-        //handlar(stack_a, stack_b, argc, size_b);
-        push_a(&argc, &size_b, stack_a, stack_b);
-        //handlar(stack_a, stack_b, argc, size_b);
-        //handlar(stack_a, stack_b, size_b);
+        best_a = besta_index(stack_a, stack_b, argc, size_b); 
+        best_b = opera_b(stack_b, stack_a[best_a], size_b - 1, 'i');
+        conta = opera_a(stack_a, argc - 1, best_a, 'o');
+        contb = opera_b(stack_b, stack_a[best_a], size_b - 1, 'o');
+        printf ("best_a >%d++--------------++conta >%d\nbest_b >%d++-----------------++contb >%d\n",best_a,conta,best_b,contb);
+                                    //chek_move(stack_a, argc, best_a, conta, 'a');
+        move_others(stack_a, argc, best_a, conta, 'a');
+        chek_move(stack_b, size_b, best_b, contb, 'b');
+        test_function(stack_a, stack_b, argc, size_b);
+        push_b(&argc, &size_b, stack_a, stack_b);
+        stack_a[i] = 0;
+        test_function(stack_a, stack_b, argc, size_b);
         i--;
     }
-    
-    // printf ("%d |****************|%d\n",best_b,best_a);
-    // printf ("%d |****************|%d\n",contb, conta);
-    best_a = chek_min(stack_a, argc - 1, &best_b);
-    //printf ("\n********a%da********\n", best_a);
-    //contb = opera_a(stack_a, argc , best_b /*best_b*/, 'o');
-    conta = opera_b(stack_a, best_a, argc  - 1 , 'o');
-    //printf ("********%d*****%d****\n", conta, argc);
-    //printf ("\n*****%d******\n", argc);
-    move_operation(stack_a, argc, best_b, conta,'a');
-    //   i = 99;
-    //handlar(stack_a, stack_b, argc, size_b);
+     best_b = chek_min(stack_b, size_b - 1, &best_a);
+     contb = opera_b(stack_b, best_b, size_b - 1, 'o');
+     printf ("%d-------%d\n",contb, best_b);
+     test_function(stack_a, stack_b, argc, size_b);
+     chek_move(stack_b, size_b, best_a, contb, 'b');
+     test_function(stack_a, stack_b, argc, size_b);
+     i = 0;
+     while (i < size_b + argc)
+     {
+         push_a(&argc, &size_b, stack_a, stack_b);
+         i++;
+     }
+    test_function(stack_a, stack_b, argc, size_b);
     free(stack_a);
     free(stack_b);
  }
@@ -408,4 +444,5 @@ int main(int argc, char **argv) {
     //handlar(str1, str2, argc - 1);
     ft_swap(argc - 1 ,size_b, str1, str2);
     //handlar(str1, str2, argc - 1);
-} //6 14 15 19 10 7 5 2 9 4 17 16 3 12 13 18 20 11 8 1
+} //6 14 15 19 10 7 5 2 9 4 17 16 3 12 13 18 20 11 8 1 // 19 14 2 3 10 1 18 6 16 15 // -744966108 2018183620 743299389 1567336198
+//189713 95550 14835 141816 55156 50560 144349 8362 115331 10950 102219 98062 193954 39158 68675 194898 150958 105500 60859 130395 8044 25299 193439 54017 105221 50631 156687 67558 170072 183388 117954 193197 5353 90924 85389 141680 21891 1670 190709 25060
