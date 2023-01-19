@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <limits.h>
 
+void test_function(int *stack_a, int *stack_b, int argc, int size_b);
+
+
 void swap(int argc, int *stack, char x);
 void ss(int argc, int size_b,int *stack_a, int *stack_b);
 void rev_rotate(int argc, int *stack, char x);
@@ -19,7 +22,7 @@ int	ft_atoi(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char *str, char c);
-void errur();
+void    errur(void);
 void ft_free(char **split, int *stack_a,char *sjoin, int number);
 int chec_space_null(int argc, char *argv[]);
 char *join(int argc, char *argv[]);
@@ -38,4 +41,10 @@ void move_othersb(int *stack, int total, int best, int operation);
 void move_othersa(int *stack, int total, int best, int operation);
 void calcul_move(int *stack_a, int *stack_b, int size_b, int argc);
 int chek_number(int *stack_b, int valeurStack_a, int size_b);
+int main (int argc, char *argv[]);
+void free_split(char **split, char *sjoin);
+void	ft_sort3(int argc, int *stack_a);
+void    ft_sort5(int argc, int size_b, int *stack_a, int *stack_b);
+void ft_sort4(int argc, int size_b , int *stack_a, int *stack_b);
+void	ft_sort2(int argc, int *stack_a);
 #endif

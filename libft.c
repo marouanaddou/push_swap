@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:18:11 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/18 16:53:57 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/19 17:50:16 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ int	ft_atoi(char *str)
 		nb = nb * 10 + str[i++] - 48;
 	if ((nb * sign) > 2147483647 || (nb * sign) < -2147483648)
 	{
-		write(2, "ERROR\n", 5);
+		write(2, "ERRuR\n", 5);
 		exit(1);
 	}
+	//free(str);
 	return ((int)nb * sign);
 }
 
@@ -70,7 +71,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	while (s2[i])
 		p[j++] = s2[i++];
-	p[i + j] = '\0';
+	p[j] = '\0';
 	free(s1);
 	return (p);
 }

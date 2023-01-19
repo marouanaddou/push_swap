@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 18:19:29 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/18 21:41:56 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/19 18:50:47 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	calcul_move(int *stack_a, int *stack_b, int size_b, int argc)
 		push_a(&argc, &size_b, stack_a, stack_b);
 		i++;
 	}
+	//test_function(stack_a, stack_b, size_b, argc);
 	free(stack_a);
 	free(stack_b);
 }
