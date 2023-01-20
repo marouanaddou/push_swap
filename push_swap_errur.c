@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:06:34 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/19 18:49:46 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/20 19:52:40 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ int	chec_space_null(int argc, char *argv[])
 	int	j;
 
 	if (chek_plus(argc, argv) == 0)
-	{
-		printf ("666");
 		return (0);
-	}
 	i = 1;
 	while (i <= argc)
 	{
@@ -33,10 +30,7 @@ int	chec_space_null(int argc, char *argv[])
 				(argv[i][j] == '+' && argv[i][j + 1] == '+') ||
 				(argv[i][j] == '+' && argv[i][j + 1] == '+') ||
 				(argv[i][j] == '-' && argv[i][j + 1] == '-'))
-				{
-					printf ("777");
 				return (0);
-				}
 			j++;
 		}
 		i++;
@@ -86,7 +80,7 @@ int	*chek(int argc, char *argv[], int *number_argument)
 	int		i;
 	char	**split;
 	int		*stack_a;
-	int j;
+	int		j;
 
 	i = 0;
 	sjoin = join(argc - 1, argv);
@@ -95,7 +89,7 @@ int	*chek(int argc, char *argv[], int *number_argument)
 	*number_argument = number(sjoin) + 1;
 	j = *number_argument - 1;
 	split = ft_split(sjoin, ' ');
-	stack_a = malloc((*number_argument - 1) * sizeof(int));
+	stack_a = malloc(*number_argument * sizeof(int));
 	if (!stack_a)
 		return (0);
 	while (i <= j)
@@ -103,8 +97,8 @@ int	*chek(int argc, char *argv[], int *number_argument)
 		stack_a[i] = ft_atoi(split[j - i]);
 		i++;
 	}
-	 if (chek_dobble(stack_a, *number_argument) == 0)
-	 	ft_free(split, stack_a, sjoin, *number_argument);
+	if (chek_dobble(stack_a, *number_argument) == 0)
+		ft_free(split, stack_a, sjoin, *number_argument);
 	free_split(split, sjoin);
 	return (stack_a);
 }

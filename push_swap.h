@@ -43,8 +43,10 @@ void calcul_move(int *stack_a, int *stack_b, int size_b, int argc);
 int chek_number(int *stack_b, int valeurStack_a, int size_b);
 int main (int argc, char *argv[]);
 void free_split(char **split, char *sjoin);
-void	ft_sort3(int argc, int *stack_a);
+void free_stack(int *stack_a, int *stack_b);
+void	ft_sort3(int argc, int *stack_a, int *stack_b, char x);
 void    ft_sort5(int argc, int size_b, int *stack_a, int *stack_b);
 void ft_sort4(int argc, int size_b , int *stack_a, int *stack_b);
-void	ft_sort2(int argc, int *stack_a);
+void	ft_sort2(int argc, int *stack_a, int *stack_b);
+int chek_order(int *str, int number);
 #endif

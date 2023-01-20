@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 18:19:29 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/19 18:50:47 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/20 19:45:43 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,11 @@ void	move_othersa(int *stack, int total, int best, int operation)
 
 void	calcul_move(int *stack_a, int *stack_b, int size_b, int argc)
 {
-    int i;
-	int best_a;
-	int best_b;
-	int conta;
-	int contb;
+	int	i;
+	int	best_a;
+	int	best_b;
+	int	conta;
+	int	contb;
 
 	i = 0;
 	best_b = chek_min(stack_b, size_b - 1, &best_a);
@@ -121,7 +121,5 @@ void	calcul_move(int *stack_a, int *stack_b, int size_b, int argc)
 		push_a(&argc, &size_b, stack_a, stack_b);
 		i++;
 	}
-	//test_function(stack_a, stack_b, size_b, argc);
-	free(stack_a);
-	free(stack_b);
+	free_stack(stack_a, stack_b);
 }

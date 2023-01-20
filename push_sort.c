@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 18:15:20 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/19 11:39:51 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/20 19:42:03 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,8 @@ int	besta_index(int *stack_a, int *stack_b, int argc, int size_b)
 	int	best_istruction;
 	int	current_instruction;
 
-	i = 0;/* argc ==> kif size_b */
-	best_istruction = INT_MAX;/* size_b
-		- 1 ==> m3a kaykon zayad wahad ohna kana9sooh bach nbdaw b zero tji hiya hadik */
+	i = 0;
+	best_istruction = INT_MAX;
 	while (i < argc)
 	{
 		current_instruction = opera_a(stack_a, argc - 1, i, 'o')
@@ -105,7 +104,7 @@ void	ft_swap(int argc, int size_b, int *stack_a, int *stack_b)
 	int	best_b;
 	int	conta;
 	int	contb;
-	
+
 	push_b(&argc, &size_b, stack_a, stack_b);
 	push_b(&argc, &size_b, stack_a, stack_b);
 	while ((argc - 1) >= 0)

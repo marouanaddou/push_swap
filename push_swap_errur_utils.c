@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_errur_prim.c                             :+:      :+:    :+:   */
+/*   push_swap_errur_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:58:17 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/18 17:42:43 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/20 19:44:52 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 int	number(char *str)
 {
@@ -53,7 +54,7 @@ int	chek_digit(char *str)
 			return (0);
 		}
 		if ((str[i] >= '0' && str[i] <= '9') && (str[i + 1] == '+' || str[i
-				+ 1] == '-'))
+					+ 1] == '-'))
 		{
 			free(str);
 			return (0);
@@ -62,6 +63,7 @@ int	chek_digit(char *str)
 	}
 	return (1);
 }
+// number -1 mo9arana 1 -- 0 hna ma3ndnach zero kykhrj mn arrray oyjibha mn 3ndo
 
 int	chek_dobble(int *str, int number)
 {
