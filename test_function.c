@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_function.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/23 13:20:05 by maddou            #+#    #+#             */
+/*   Updated: 2023/01/23 13:24:16 by maddou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	test_function(int *stack_a, int *stack_b, int argc, int size_b)
+void	test_function(int *stack_a, int *stack_b)
 {
-	int i;
-    
-    i = 4;
+	int	i;
+	
+	i = 99;
 	printf("******************************\n");
 	while (i >= 0)
 	{
 		printf("%d| ----------+%d | --------+%d |\n", i, stack_a[i],
-				stack_b[i]);
+			stack_b[i]);
 		i--;
 	}
 	printf("******************************\n");

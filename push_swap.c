@@ -6,11 +6,63 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:47:29 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/20 19:28:07 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/23 13:19:42 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	larger(int *stack_a, int *stack_b, int argc, int size_b)
+{
+	int	best_a;
+	int	best_b;
+	int	conta;
+	int	contb;
+	int	i;
+
+	best_a = besta_index(stack_a, stack_b, argc, size_b);
+	best_b = opera_b(stack_b, stack_a[best_a], size_b - 1, 'i');
+	conta = opera_a(stack_a, argc - 1, best_a, 'o');
+	contb = opera_b(stack_b, stack_a[best_a], size_b - 1, 'o');
+	i = chek_number(stack_b, stack_a[best_a], size_b - 1);
+	while ((conta > 0 && contb > 0) && (best_a >= (argc - 1) / 2
+			&& best_a >= (size_b - 1) / 2) && i != 1)
+	{
+		rr(argc, size_b, stack_a, stack_b);
+		conta--;
+		contb--;
+	}
+	while (conta-- > 0)
+		rotate(argc, stack_a, 'a');
+	while (contb-- > 0 && i != 1)
+		rotate(size_b, stack_b, 'b');
+}
+
+void	smaller(int *stack_a, int *stack_b, int argc, int size_b)
+{
+	int	best_a;
+	int	best_b;
+	int	conta;
+	int	contb;
+	int	i;
+
+	best_a = besta_index(stack_a, stack_b, argc, size_b);
+	best_b = opera_b(stack_b, stack_a[best_a], size_b - 1, 'i');
+	conta = opera_a(stack_a, argc - 1, best_a, 'o');
+	contb = opera_b(stack_b, stack_a[best_a], size_b - 1, 'o');
+	i = chek_number(stack_b, stack_a[best_a], size_b - 1);
+	while ((conta > 0 && contb > 0) && (best_a <= (argc - 1) / 2
+			&& best_a <= (size_b - 1) / 2) && i != 1)
+	{
+		rrr(argc, size_b, stack_a, stack_b);
+		conta--;
+		contb--;
+	}
+	while (conta-- > 0)
+		rev_rotate(argc, stack_a, 'a');
+	while (contb-- > 0 && i != 1)
+		rev_rotate(size_b, stack_b, 'b');
+}
 
 void	free_stack(int *stack_a, int *stack_b)
 {

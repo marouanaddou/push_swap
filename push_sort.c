@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 18:15:20 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/20 19:42:03 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/23 15:26:49 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	opera_a(int *stack_a, int argc, int index, char chek)
 {
 	int	contab;
 
+	(void)stack_a;
 	if (chek == 'i')
 		contab = index;
 	if (chek == 'o')
@@ -55,8 +56,6 @@ int	opera_b(int *stack_b, int value, int size_b, char chek)
 {
 	int	contb;
 	int	index_min;
-	int	index_max;
-	int	size;
 	int	min;
 
 	min = chek_min(stack_b, size_b, &index_min);
@@ -76,8 +75,8 @@ int	opera_b(int *stack_b, int value, int size_b, char chek)
 
 int	besta_index(int *stack_a, int *stack_b, int argc, int size_b)
 {
-	int	i;
 	int	j;
+	int	i;
 	int	best_istruction;
 	int	current_instruction;
 
@@ -99,45 +98,16 @@ int	besta_index(int *stack_a, int *stack_b, int argc, int size_b)
 
 void	ft_swap(int argc, int size_b, int *stack_a, int *stack_b)
 {
-	int	i;
-	int	best_a;
-	int	best_b;
-	int	conta;
-	int	contb;
+	t_stack	t_data;
 
-	push_b(&argc, &size_b, stack_a, stack_b);
-	push_b(&argc, &size_b, stack_a, stack_b);
-	while ((argc - 1) >= 0)
-	{
-		best_a = besta_index(stack_a, stack_b, argc, size_b);
-		best_b = opera_b(stack_b, stack_a[best_a], size_b - 1, 'i');
-		conta = opera_a(stack_a, argc - 1, best_a, 'o');
-		contb = opera_b(stack_b, stack_a[best_a], size_b - 1, 'o');
-		i = stack_a[best_a];
-		move_othersa(stack_a, argc, best_a, conta);
-		conta = chek_number(stack_b, i, size_b - 1);
-		if (conta == 1)
-			move_min(stack_b, size_b, best_b, contb);
-		else
-			move_othersb(stack_b, size_b, best_b, contb);
-		push_b(&argc, &size_b, stack_a, stack_b);
-	}
-	calcul_move(stack_a, stack_b, size_b, argc);
+	t_data.argc = argc;
+	t_data.size_b = size_b;
+	t_data.stack_a = stack_a;
+	t_data.stack_b = stack_b;
+	push_b(&((t_data).argc), &((t_data).size_b), (t_data).stack_a,
+		(t_data).stack_b);
+	push_b(&((t_data).argc), &((t_data).size_b), (t_data).stack_a,
+		(t_data).stack_b);
+	ft_sorting(&t_data);
+	calcul_move(t_data.stack_a, t_data.stack_b, t_data.size_b, t_data.argc);
 }
-
-// int main(int argc, char *argv[]) {
-//   int *stack_a;
-//   char *stack_b;
-//   int number_argument;
-//   int i;
-
-//   i = 0;
-//   stack_a = chek(argc, argv, &number_argument);
-//   stack_b = malloc(number_argument * sizeof(int));
-//   if (!stack_b)
-//     return (0);
-
-//   //printf ("%d", number_argument);
-//   //chek_digit(x);
-//   return (0);
-// }

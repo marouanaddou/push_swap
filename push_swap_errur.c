@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:06:34 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/20 19:52:40 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/21 15:09:57 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	errur(void)
 	exit(1);
 }
 
-void	ft_free(char **split, int *stack_a, char *sjoin, int number)
+void	ft_free(char **split, int *stack_a, char *sjoin)
 {
 	free_split(split, sjoin);
 	free(stack_a);
@@ -98,7 +98,7 @@ int	*chek(int argc, char *argv[], int *number_argument)
 		i++;
 	}
 	if (chek_dobble(stack_a, *number_argument) == 0)
-		ft_free(split, stack_a, sjoin, *number_argument);
+		ft_free(split, stack_a, sjoin);
 	free_split(split, sjoin);
 	return (stack_a);
 }
