@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 18:19:29 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/23 12:19:28 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/24 12:46:44 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	move_othersa(int *stack, int total, int best, int operation)
 	}
 }
 
-void	calcul_move(int *stack_a, int *stack_b, int size_b, int argc)
+void	calcul_move_min(int *stack_a, int *stack_b, int size_b, int argc)
 {
 	int	i;
 	int	best_a;

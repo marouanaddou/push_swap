@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:58:17 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/20 19:44:52 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/24 12:56:14 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	chek_digit(char *str)
 }
 // number -1 mo9arana 1 -- 0 hna ma3ndnach zero kykhrj mn arrray oyjibha mn 3ndo
 
-int	chek_dobble(int *str, int number)
+int	chek_double(int *str, int number)
 {
 	int	i;
 	int	j;

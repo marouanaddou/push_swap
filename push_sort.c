@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 18:15:20 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/23 15:26:49 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/24 12:55:34 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ void	ft_swap(int argc, int size_b, int *stack_a, int *stack_b)
 	push_b(&((t_data).argc), &((t_data).size_b), (t_data).stack_a,
 		(t_data).stack_b);
 	ft_sorting(&t_data);
-	calcul_move(t_data.stack_a, t_data.stack_b, t_data.size_b, t_data.argc);
+	calcul_move_min(t_data.stack_a, t_data.stack_b, t_data.size_b, t_data.argc);
 }

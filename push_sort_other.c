@@ -6,32 +6,33 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 19:12:13 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/20 19:37:57 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/24 12:54:14 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	ft_sort2(int argc, int *stack_a, int *stack_b)
-{
-	if (stack_a[0] > stack_a[1])
-		return ;
-	else
-		swap(argc, stack_a, 'a');
-	free_stack(stack_a, stack_b);
-}
 
 void	ft_sort4(int argc, int size_b, int *stack_a, int *stack_b)
 {
 	int	j;
 	int	conta;
 
-	chek_min(stack_a, argc - 1, &j);
-	conta = opera_a(stack_a, argc - 1, j, 'o');
-	move_othersa(stack_a, argc, j, conta);
-	push_b(&argc, &size_b, stack_a, stack_b);
-	ft_sort3(argc, stack_a, stack_b, 'a');
-	push_a(&argc, &size_b, stack_a, stack_b);
+	if (argc == 2)
+	{
+		if (stack_a[0] > stack_a[1])
+			return ;
+		else
+			swap(argc, stack_a, 'a');
+	}
+	else
+	{
+		chek_min(stack_a, argc - 1, &j);
+		conta = opera_a(stack_a, argc - 1, j, 'o');
+		move_othersa(stack_a, argc, j, conta);
+		push_b(&argc, &size_b, stack_a, stack_b);
+		ft_sort3(argc, stack_a, stack_b, 'a');
+		push_a(&argc, &size_b, stack_a, stack_b);
+	}
 	free_stack(stack_a, stack_b);
 }
 

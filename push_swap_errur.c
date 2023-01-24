@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:06:34 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/21 15:09:57 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/24 11:23:46 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	chec_space_null(int argc, char *argv[])
 			if (argv[i][j + 1] == '\0' ||
 				(argv[i][j] == '-' && argv[i][j + 1] == '-') ||
 				(argv[i][j] == '+' && argv[i][j + 1] == '+') ||
-				(argv[i][j] == '+' && argv[i][j + 1] == '+') ||
-				(argv[i][j] == '-' && argv[i][j + 1] == '-'))
+				(argv[i][j] == '+' && argv[i][j + 1] == '-') ||
+				(argv[i][j] == '-' && argv[i][j + 1] == '+'))
 				return (0);
 			j++;
 		}
@@ -40,7 +40,7 @@ int	chec_space_null(int argc, char *argv[])
 
 void	errur(void)
 {
-	write(2, "ERRUR", 5);
+	write(2, "ERRUR\n", 6);
 	exit(1);
 }
 
@@ -88,7 +88,7 @@ int	*chek(int argc, char *argv[], int *number_argument)
 		errur();
 	*number_argument = number(sjoin) + 1;
 	j = *number_argument - 1;
-	split = ft_split(sjoin, ' ');
+	split = ft_split(sjoin, ' ', *number_argument);
 	stack_a = malloc(*number_argument * sizeof(int));
 	if (!stack_a)
 		return (0);
@@ -97,7 +97,7 @@ int	*chek(int argc, char *argv[], int *number_argument)
 		stack_a[i] = ft_atoi(split[j - i]);
 		i++;
 	}
-	if (chek_dobble(stack_a, *number_argument) == 0)
+	if (chek_double(stack_a, *number_argument) == 0)
 		ft_free(split, stack_a, sjoin);
 	free_split(split, sjoin);
 	return (stack_a);

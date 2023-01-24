@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:47:29 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/23 13:19:42 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/24 12:03:50 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,20 +94,21 @@ int	main(int argc, char *argv[])
 
 	i = 0;
 	size_b = 0;
-	stack_a = chek(argc, argv, &number_argument);
-	if (chek_order(stack_a, number_argument))
-		exit(0);
-	stack_b = malloc((number_argument) * sizeof(int));
-	if (!stack_b)
-		return (0);
-	if (number_argument == 2)
-		ft_sort2(number_argument, stack_a, stack_b);
-	else if (number_argument == 3)
-		ft_sort3(number_argument, stack_a, stack_b, 'f');
-	else if (number_argument == 4)
-		ft_sort4(number_argument, size_b, stack_a, stack_b);
-	else if (number_argument == 5)
-		ft_sort5(number_argument, size_b, stack_a, stack_b);
-	else if (number_argument > 5)
-		ft_swap(number_argument, size_b, stack_a, stack_b);
+	if (argc > 1)
+	{
+		stack_a = chek(argc, argv, &number_argument);
+		if (chek_order(stack_a, number_argument) == 1)
+			exit(0);
+		stack_b = malloc((number_argument) * sizeof(int));
+		if (!stack_b)
+			return (0);
+		else if (number_argument == 3)
+			ft_sort3(number_argument, stack_a, stack_b, 'f');
+		else if (number_argument == 4 || number_argument == 2)
+			ft_sort4(number_argument, size_b, stack_a, stack_b);
+		else if (number_argument == 5)
+			ft_sort5(number_argument, size_b, stack_a, stack_b);
+		else if (number_argument > 5)
+			ft_swap(number_argument, size_b, stack_a, stack_b);
+	}
 }

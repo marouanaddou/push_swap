@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 13:25:46 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/23 15:26:10 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/24 12:47:37 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ size_t	ft_strlen(const char *s);
 int		ft_atoi(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	**ft_split(char *str, char c);
+char	**ft_split(char *str, char c, int number_argument);
 void	errur(void);
 void	ft_free(char **split, int *stack_a, char *sjoin);
 int		chec_space_null(int argc, char *argv[]);
@@ -55,7 +55,7 @@ char	*join(int argc, char *argv[]);
 int		*chek(int argc, char *argv[], int *number_argument);
 int		chek_plus(int argc, char *argv[]);
 int		chek_digit(char *str);
-int		chek_dobble(int *str, int number);
+int		chek_double(int *str, int number);
 int		opera_a(int *stack_a, int argc, int index, char chek);
 int		find_right_pos(int size_b, int value, int *stack_b, char chek);
 int		opera_b(int *stack_b, int value, int size_b, char chek);
@@ -65,7 +65,7 @@ int		chek_min(int *stack_b, int size_b, int *index_min);
 void	move_min(int *stack_b, int size_b, int best_b, int operation);
 void	move_othersb(int *stack, int total, int best, int operation);
 void	move_othersa(int *stack, int total, int best, int operation);
-void	calcul_move(int *stack_a, int *stack_b, int size_b, int argc);
+void	calcul_move_min(int *stack_a, int *stack_b, int size_b, int argc);
 int		chek_number(int *stack_b, int valeurStack_a, int size_b);
 int		main(int argc, char *argv[]);
 void	free_split(char **split, char *sjoin);

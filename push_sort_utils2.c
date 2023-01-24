@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 19:00:46 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/23 15:27:46 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/24 12:55:04 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	chek_order(int *str, int number)
 		i++;
 	}
 	if (j == number - 1)
+	{
+		free(str);
 		return (1);
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:18:11 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/20 16:09:37 by maddou           ###   ########.fr       */
+/*   Updated: 2023/01/24 10:16:23 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ int	ft_atoi(char *str)
 	while (str[i] >= 48 && str[i] <= 57)
 		nb = nb * 10 + str[i++] - 48;
 	if ((nb * sign) > 2147483647 || (nb * sign) < -2147483648)
-	{
-		write(2, "ERRUR\n", 5);
-		exit(1);
-	}
+		errur();
 	return ((int)(nb * sign));
 }
 
@@ -95,7 +92,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (p);
 }
 
-char	**ft_split(char *str, char c)
+char	**ft_split(char *str, char c, int number_argument)
 {
 	int		i;
 	int		j;
@@ -104,7 +101,7 @@ char	**ft_split(char *str, char c)
 
 	i = 0;
 	j = 0;
-	result = (char **)malloc((number(str) + 1 + 1) * sizeof(char *));
+	result = (char **)malloc((number_argument + 1) * sizeof(char *));
 	if (!result)
 		return (0);
 	while (str[i] != '\0')

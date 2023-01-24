@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRC = 	operation.c    operation_utils.c \
 	  	push_sort.c    push_sort_utils.c push_sort_utils2.c \
 	  	push_sort_other.c push_swap_errur_utils.c push_swap_errur.c \
-	  	push_swap.c libft.c test_function.c
+	  	push_swap.c libft.c
 OBJ = $(SRC:.c=.o)
 NAME = pushswap.a
 
