@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.c                                            :+:      :+:    :+:   */
+/*   libft_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 16:18:11 by maddou            #+#    #+#             */
-/*   Updated: 2023/02/06 13:14:08 by maddou           ###   ########.fr       */
+/*   Created: 2023/02/06 13:17:02 by maddou            #+#    #+#             */
+/*   Updated: 2023/02/08 11:57:49 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -20,6 +20,26 @@ size_t	ft_strlen(const char *s)
 	while (s[i] != '\0')
 		i++;
 	return (i);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	char	*p;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	p = malloc(len + 1);
+	if (!p)
+		return (0);
+	while (start < ft_strlen(s) && s[start + i] != '\0' && i < len)
+	{
+		p[i] = s[i + start];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
 }
 
 int	ft_atoi(char *str)
@@ -45,51 +65,6 @@ int	ft_atoi(char *str)
 	if ((nb * sign) > 2147483647 || (nb * sign) < -2147483648)
 		errur();
 	return ((int)(nb * sign));
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	int		i;
-	char	*p;
-	int		len;
-	int		j;
-
-	if (!s1 || !s2)
-		return (NULL);
-	i = 0;
-	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	p = malloc(len + 1);
-	if (!p)
-		return (NULL);
-	while (s1[i])
-		p[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		p[j++] = s2[i++];
-	p[j] = '\0';
-	free(s1);
-	return (p);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	size_t	i;
-	char	*p;
-
-	if (!s)
-		return (NULL);
-	i = 0;
-	p = malloc(len + 1);
-	if (!p)
-		return (0);
-	while (start < ft_strlen(s) && s[start + i] != '\0' && i < len)
-	{
-		p[i] = s[i + start];
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
 }
 
 char	**ft_split(char *str, char c, int number_argument)

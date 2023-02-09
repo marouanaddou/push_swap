@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 18:19:29 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/24 12:46:44 by maddou           ###   ########.fr       */
+/*   Updated: 2023/02/09 21:29:09 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,6 @@ int	chek_min(int *stack_b, int size_b, int *index_min)
 		}
 	}
 	return (min);
-}
-
-void	move_min(int *stack_b, int size_b, int best_b, int operation)
-{
-	int	i;
-
-	i = 0;
-	if (best_b > (size_b - 1) / 2)
-	{
-		while (i < operation)
-		{
-			rotate(size_b, stack_b, 'b');
-			i++;
-		}
-	}
-	else if (best_b <= (size_b - 1) / 2)
-	{
-		while (i < operation)
-		{
-			rev_rotate(size_b, stack_b, 'b');
-			i++;
-		}
-	}
 }
 
 void	move_othersb(int *stack, int total, int best, int operation)
@@ -111,14 +88,10 @@ void	calcul_move_min(int *stack_a, int *stack_b, int size_b, int argc)
 	int	best_b;
 	int	contb;
 
+	(void)size_b;
 	i = 0;
-	best_b = chek_min(stack_b, size_b - 1, &best_a);
-	contb = opera_b(stack_b, best_b, size_b - 1, 'o');
-	move_min(stack_b, size_b, best_a, contb);
-	while (i < size_b + argc)
-	{
-		push_a(&argc, &size_b, stack_a, stack_b);
-		i++;
-	}
+	best_b = chek_min(stack_a, argc - 1, &best_a);
+	contb = opera_b(stack_a, best_b, argc - 1, '0');
+	move_othersa(stack_a, argc, best_a, contb);
 	free_stack(stack_a, stack_b);
 }

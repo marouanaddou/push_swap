@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_errur.c                                  :+:      :+:    :+:   */
+/*   push_errur.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 17:06:34 by maddou            #+#    #+#             */
-/*   Updated: 2023/02/08 21:18:03 by maddou           ###   ########.fr       */
+/*   Created: 2023/02/06 13:07:38 by maddou            #+#    #+#             */
+/*   Updated: 2023/02/08 21:37:01 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 int	chec_space_null(int argc, char *argv[])
 {
@@ -46,7 +46,7 @@ void	errur(void)
 
 void	ft_free(char **split, int *stack_a, char *sjoin)
 {
-	free_split(split, sjoin);
+	free_split(split, sjoin, 'x');
 	free(stack_a);
 	errur();
 }
@@ -99,6 +99,6 @@ int	*chek(int argc, char *argv[], int *number_argument)
 	}
 	if (chek_double(stack_a, *number_argument) == 0)
 		ft_free(split, stack_a, sjoin);
-	free_split(split, sjoin);
+	free_split(split, sjoin, 'x');
 	return (stack_a);
 }

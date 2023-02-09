@@ -6,7 +6,7 @@
 /*   By: maddou <maddou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:47:29 by maddou            #+#    #+#             */
-/*   Updated: 2023/01/24 12:03:50 by maddou           ###   ########.fr       */
+/*   Updated: 2023/02/09 21:34:58 by maddou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,13 @@ void	larger(int *stack_a, int *stack_b, int argc, int size_b)
 	int	best_b;
 	int	conta;
 	int	contb;
-	int	i;
 
-	best_a = besta_index(stack_a, stack_b, argc, size_b);
-	best_b = opera_b(stack_b, stack_a[best_a], size_b - 1, 'i');
-	conta = opera_a(stack_a, argc - 1, best_a, 'o');
-	contb = opera_b(stack_b, stack_a[best_a], size_b - 1, 'o');
-	i = chek_number(stack_b, stack_a[best_a], size_b - 1);
+	best_b = besta_index(stack_a, stack_b, argc, size_b);
+	best_a = opera_b(stack_a, stack_b[best_b], argc - 1, 'i');
+	contb = opera_a(stack_a, size_b - 1, best_b, 'o');
+	conta = opera_b(stack_a, stack_b[best_b], argc - 1, 'o');
 	while ((conta > 0 && contb > 0) && (best_a >= (argc - 1) / 2
-			&& best_a >= (size_b - 1) / 2) && i != 1)
+			&& best_a >= (size_b - 1) / 2))
 	{
 		rr(argc, size_b, stack_a, stack_b);
 		conta--;
@@ -34,7 +32,7 @@ void	larger(int *stack_a, int *stack_b, int argc, int size_b)
 	}
 	while (conta-- > 0)
 		rotate(argc, stack_a, 'a');
-	while (contb-- > 0 && i != 1)
+	while (contb-- > 0)
 		rotate(size_b, stack_b, 'b');
 }
 
@@ -44,15 +42,13 @@ void	smaller(int *stack_a, int *stack_b, int argc, int size_b)
 	int	best_b;
 	int	conta;
 	int	contb;
-	int	i;
 
-	best_a = besta_index(stack_a, stack_b, argc, size_b);
-	best_b = opera_b(stack_b, stack_a[best_a], size_b - 1, 'i');
-	conta = opera_a(stack_a, argc - 1, best_a, 'o');
-	contb = opera_b(stack_b, stack_a[best_a], size_b - 1, 'o');
-	i = chek_number(stack_b, stack_a[best_a], size_b - 1);
+	best_b = besta_index(stack_a, stack_b, argc, size_b);
+	best_a = opera_b(stack_a, stack_b[best_b], argc - 1, 'i');
+	contb = opera_a(stack_a, size_b - 1, best_b, 'o');
+	conta = opera_b(stack_a, stack_b[best_b], argc - 1, 'o');
 	while ((conta > 0 && contb > 0) && (best_a <= (argc - 1) / 2
-			&& best_a <= (size_b - 1) / 2) && i != 1)
+			&& best_a <= (size_b - 1) / 2))
 	{
 		rrr(argc, size_b, stack_a, stack_b);
 		conta--;
@@ -60,7 +56,7 @@ void	smaller(int *stack_a, int *stack_b, int argc, int size_b)
 	}
 	while (conta-- > 0)
 		rev_rotate(argc, stack_a, 'a');
-	while (contb-- > 0 && i != 1)
+	while (contb-- > 0)
 		rev_rotate(size_b, stack_b, 'b');
 }
 
@@ -86,29 +82,27 @@ void	free_split(char **split, char *sjoin)
 
 int	main(int argc, char *argv[])
 {
-	int	number_argument;
-	int	i;
-	int	*stack_a;
-	int	*stack_b;
-	int	size_b;
+	t_stack	s;
 
-	i = 0;
-	size_b = 0;
+	s.size_b = 0;
 	if (argc > 1)
 	{
-		stack_a = chek(argc, argv, &number_argument);
-		if (chek_order(stack_a, number_argument) == 1)
+		(s).stack_a = chek(argc, argv, &s.n_arg);
+		if (chek_order((s).stack_a, s.n_arg) == 1)
 			exit(0);
-		stack_b = malloc((number_argument) * sizeof(int));
-		if (!stack_b)
+		(s).stack_b = malloc((s.n_arg) * sizeof(int));
+		if (!(s).stack_b)
 			return (0);
-		else if (number_argument == 3)
-			ft_sort3(number_argument, stack_a, stack_b, 'f');
-		else if (number_argument == 4 || number_argument == 2)
-			ft_sort4(number_argument, size_b, stack_a, stack_b);
-		else if (number_argument == 5)
-			ft_sort5(number_argument, size_b, stack_a, stack_b);
-		else if (number_argument > 5)
-			ft_swap(number_argument, size_b, stack_a, stack_b);
+		else if (s.n_arg == 3)
+			ft_sort3(s.n_arg, (s).stack_a, (s).stack_b, 'f');
+		else if (s.n_arg == 4 || s.n_arg == 2)
+			ft_sort4(s.n_arg, (s).size_b, (s).stack_a, (s).stack_b);
+		else if (s.n_arg == 5)
+			ft_sort5(s.n_arg, (s).size_b, (s).stack_a, (s).stack_b);
+		if (s.n_arg > 5)
+		{
+			copier_stack(&s);
+			ft_swap(s.n_arg, s.size_b, s.stack_a, s.stack_b);
+		}
 	}
 }
